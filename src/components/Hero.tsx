@@ -1,23 +1,39 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import {
   ArrowRight,
   FileDown,
   Mail,
-  Bot,
-  Brain,
-  Cpu,
-  Layers,
-  Sparkles,
-  MapPin,
   GraduationCap,
+  MapPin,
 } from 'lucide-react'
 import { personalData } from '../data/personal'
 
 export const Hero: React.FC = () => {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [rotate, setRotate] = useState({ x: 0, y: 0 })
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    if (window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window) {
+      setIsTouch(true)
+      return
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window
+      const x = (e.clientX / innerWidth - 0.5) * 2
+      const y = (e.clientY / innerHeight - 0.5) * 2
+      setRotate({ x: -y * 4, y: x * 4 })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   return (
     <section
       id="home"
-      className="relative w-full bg-paper pt-12 sm:pt-16 pb-14 sm:pb-20 border-b border-[rgba(0,0,0,0.12)] overflow-hidden"
+      className="relative w-full bg-paper pt-10 sm:pt-14 pb-12 sm:pb-16 border-b border-[rgba(0,0,0,0.12)] overflow-hidden"
     >
       <div className="content-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-end">
@@ -31,8 +47,8 @@ export const Hero: React.FC = () => {
               <span className="w-8 h-[1.5px] bg-[#0B5D3B]" />
             </div>
 
-            {/* Giant Architectural Header */}
-            <h1 className="font-anton text-[clamp(2.4rem,7.8vw,6.4rem)] leading-[0.88] tracking-[-0.02em] uppercase text-ink select-none whitespace-normal sm:whitespace-nowrap overflow-visible">
+            {/* Giant Monumental Name */}
+            <h1 className="font-anton text-[clamp(2.5rem,7.6vw,6.4rem)] leading-[0.88] tracking-[-0.02em] uppercase text-ink select-none whitespace-normal sm:whitespace-nowrap overflow-visible">
               FRANKLIN ROHITH F.
             </h1>
 
@@ -79,7 +95,7 @@ export const Hero: React.FC = () => {
               </a>
             </div>
 
-            {/* Social Links Row */}
+            {/* Channels Row */}
             <div className="mt-8 pt-6 border-t border-[rgba(0,0,0,0.12)] flex flex-wrap items-center gap-4 text-xs font-mono text-ink-muted">
               <span className="font-bold text-ink uppercase tracking-wider">CHANNELS:</span>
               <a
@@ -109,98 +125,83 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column (lg:col-span-5) */}
+          {/* Right Column (lg:col-span-5) - Portrait with Architectural Glass Card Frame */}
           <div className="lg:col-span-5 relative flex items-end justify-center lg:justify-end">
-            <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[400px] aspect-[4/5] flex items-end justify-center">
-              {/* Outer decorative layered border card */}
+            <div
+              ref={cardRef}
+              className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[410px] aspect-[4/5] flex items-end justify-center"
+              style={
+                isTouch
+                  ? undefined
+                  : {
+                      transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+                      transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+              }
+            >
+              {/* Outer Depth Shadow */}
               <div
-                className="absolute inset-x-2 sm:inset-x-3 bottom-0 top-6 sm:top-8 rounded-[2rem] pointer-events-none -z-10"
+                className="absolute inset-x-3 sm:inset-x-5 bottom-0 top-8 sm:top-10 rounded-[2.2rem] pointer-events-none -z-20"
                 style={{
                   boxShadow:
-                    '0 30px 60px -15px rgba(20, 26, 22, 0.08), 0 12px 28px -6px rgba(0, 0, 0, 0.04)',
+                    '0 30px 60px -15px rgba(20, 26, 22, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.06)',
                 }}
                 aria-hidden="true"
               />
 
-              {/* Glass Frosted Backing Card */}
+              {/* Ambient Highlight */}
               <div
-                className="absolute inset-x-1 sm:inset-x-2 bottom-0 top-4 sm:top-6 rounded-[2rem] z-0 pointer-events-none"
+                className="absolute inset-x-2 sm:inset-x-3 bottom-0 top-6 sm:top-8 rounded-[2.2rem] pointer-events-none -z-10"
+                style={{
+                  boxShadow:
+                    '0 0 40px 10px rgba(255, 255, 255, 0.95), 0 0 80px 20px rgba(255, 255, 255, 0.6)',
+                }}
+                aria-hidden="true"
+              />
+
+              {/* Architectural Glass Container */}
+              <div
+                className="absolute inset-x-2 sm:inset-x-3 bottom-0 top-6 sm:top-8 rounded-[2.2rem] z-0 pointer-events-none"
                 style={{
                   background:
-                    'linear-gradient(140deg, rgba(255, 255, 255, 0.85) 0%, rgba(246, 244, 239, 0.65) 100%)',
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(0, 0, 0, 0.1)',
-                  boxShadow:
-                    'inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95), 0 25px 45px -12px rgba(18, 25, 20, 0.07)',
+                    'linear-gradient(140deg, rgba(255, 255, 255, 0.72) 0%, rgba(247, 247, 245, 0.45) 50%, rgba(255, 255, 255, 0.6) 100%)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.85)',
+                  boxShadow: `
+                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
+                    inset 0 0 30px 0 rgba(255, 255, 255, 0.35),
+                    0 0 35px 4px rgba(255, 255, 255, 0.75),
+                    0 25px 45px -12px rgba(18, 25, 20, 0.08)
+                  `,
                 }}
                 aria-hidden="true"
               />
 
-              {/* Developer Spec Card Inside */}
-              <div className="relative z-10 w-full h-full p-6 sm:p-7 flex flex-col justify-between text-left">
-                {/* Header bar */}
-                <div className="flex items-center justify-between border-b border-[rgba(0,0,0,0.1)] pb-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#CBC8C1]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#CBC8C1]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#CBC8C1]" />
-                  </div>
-                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#0B5D3B] font-semibold">
-                    DEV // SPEC.01
-                  </span>
-                </div>
+              {/* Portrait Image Container */}
+              <div className="w-full h-full relative z-10 rounded-[2.2rem] overflow-hidden flex items-end justify-center shadow-subtle border border-[rgba(0,0,0,0.08)]">
+                <img
+                  src="/portrait.jpg"
+                  alt="Franklin Rohith F. - Software Developer & MCA Student"
+                  className="w-full h-full object-cover object-top select-none pointer-events-none relative z-10 drop-shadow-[0_14px_28px_rgba(0,0,0,0.08)]"
+                  loading="eager"
+                />
 
-                {/* Central Monogram and Identity */}
-                <div className="my-auto py-4 space-y-4">
-                  <div className="w-20 h-20 rounded-2xl bg-paper-card border border-[rgba(0,0,0,0.12)] flex flex-col items-center justify-center shadow-subtle mx-auto">
-                    <span className="font-anton text-3xl text-ink tracking-tight">F/R</span>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#0B5D3B] font-semibold">
-                      ENGINEER
-                    </span>
-                  </div>
-
-                  <div className="text-center space-y-1">
-                    <h3 className="font-serif text-2xl text-ink font-normal">
-                      Franklin Rohith F.
-                    </h3>
-                    <div className="flex items-center justify-center gap-1.5 text-xs text-ink-muted">
-                      <GraduationCap className="w-3.5 h-3.5 text-[#0B5D3B]" />
-                      <span>MCA • St. Joseph's University</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-1 text-[11px] text-ink-muted font-mono">
-                      <MapPin className="w-3 h-3 text-[#0B5D3B]" />
-                      <span>Bengaluru, Karnataka, India</span>
-                    </div>
-                  </div>
-
-                  {/* Core Domain Badges */}
-                  <div className="grid grid-cols-2 gap-2 pt-2 text-[11px] font-sans">
-                    <div className="p-2 rounded-lg bg-paper border border-[rgba(0,0,0,0.08)] flex items-center gap-2">
-                      <Brain className="w-3.5 h-3.5 text-[#0B5D3B]" />
-                      <span className="font-medium text-ink">AI / Vision</span>
-                    </div>
-                    <div className="p-2 rounded-lg bg-paper border border-[rgba(0,0,0,0.08)] flex items-center gap-2">
-                      <Bot className="w-3.5 h-3.5 text-[#0B5D3B]" />
-                      <span className="font-medium text-ink">Robotics</span>
-                    </div>
-                    <div className="p-2 rounded-lg bg-paper border border-[rgba(0,0,0,0.08)] flex items-center gap-2">
-                      <Cpu className="w-3.5 h-3.5 text-[#0B5D3B]" />
-                      <span className="font-medium text-ink">IoT Telemetry</span>
-                    </div>
-                    <div className="p-2 rounded-lg bg-paper border border-[rgba(0,0,0,0.08)] flex items-center gap-2">
-                      <Layers className="w-3.5 h-3.5 text-[#0B5D3B]" />
-                      <span className="font-medium text-ink">Full-Stack</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Bottom Strip */}
-                <div className="pt-3 border-t border-[rgba(0,0,0,0.1)] flex items-center justify-between text-[11px] font-mono">
-                  <span className="text-ink-muted">STATUS:</span>
-                  <span className="inline-flex items-center gap-1.5 text-[#0B5D3B] font-semibold">
+                {/* Glass Status Overlay Pill */}
+                <div className="absolute bottom-4 inset-x-4 z-20 px-4 py-2.5 rounded-2xl bg-[#F6F4EF]/92 backdrop-blur-md border border-[rgba(0,0,0,0.12)] flex items-center justify-between text-xs shadow-md">
+                  <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#0B5D3B] animate-pulse" />
-                    OPEN TO ROLES
+                    <div>
+                      <span className="font-sans font-bold text-ink text-xs block leading-tight">
+                        Franklin Rohith F.
+                      </span>
+                      <span className="font-sans text-[10.5px] text-ink-muted">
+                        St. Joseph's University, Bengaluru
+                      </span>
+                    </div>
+                  </div>
+                  <span className="font-mono text-[10px] uppercase font-bold text-[#0B5D3B] px-2 py-0.5 rounded bg-paper border border-[rgba(0,0,0,0.08)]">
+                    MCA // READY
                   </span>
                 </div>
               </div>
