@@ -1,120 +1,116 @@
 import React from 'react'
-import {
-  GraduationCap,
-  MapPin,
-  Code2,
-  Cpu,
-} from 'lucide-react'
+import { Layout, Cpu, Wrench, GraduationCap, MapPin, Code2, Sparkles } from 'lucide-react'
 import { personalData } from '../data/personal'
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-20 sm:py-28 bg-[#08090D] border-b border-white/[0.08] relative">
-      <div className="content-container">
-        {/* Section Eyebrow & Heading */}
-        <div className="max-w-3xl text-left mb-14">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-              PROFILE & BACKGROUND
-            </span>
-            <span className="w-8 h-[1.5px] bg-cyan-400" />
-          </div>
-
-          <h2 className="font-space text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.08] font-bold">
-            Bridging Software & Hardware with{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
-              Rigorous Intent.
-            </span>
-          </h2>
-
-          <div className="w-12 h-[2px] bg-cyan-400 my-5" />
-
-          {/* Narrative Bio */}
-          <div className="space-y-4 text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed font-sans">
-            {personalData.bio.map((para, idx) => (
-              <p key={idx}>{para}</p>
-            ))}
-          </div>
+    <section id="about" className="py-20 sm:py-28 bg-[#FFFFFF] text-black relative">
+      <div className="content-container text-center">
+        {/* Tomasz Gajda Framed Section Badge */}
+        <div className="inline-block mb-4">
+          <span className="section-badge">ABOUT ME</span>
         </div>
 
-        {/* 3-Column Numbered Bento Highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 pt-4 pb-14 border-b border-white/[0.08] text-left">
-          {personalData.highlights.map((hl) => (
-            <div
-              key={hl.number}
-              className="card-bento p-6 sm:p-7 rounded-2xl flex flex-col justify-between"
-            >
-              <div>
-                <span className="font-mono text-xs uppercase tracking-wider text-cyan-400 font-bold block mb-2">
-                  ARCH // {hl.number}
-                </span>
-                <h3 className="font-space text-xl sm:text-2xl text-white font-bold leading-snug">
-                  {hl.title}
-                </h3>
-                <p className="font-sans text-xs sm:text-sm text-slate-400 mt-2.5 leading-relaxed">
-                  {hl.detail}
-                </p>
-              </div>
-            </div>
+        {/* Minimalist Divider Line with Centered Diamond */}
+        <div className="flex items-center justify-center gap-3 my-6 max-w-xs mx-auto">
+          <div className="h-[1.5px] bg-black/20 flex-1" />
+          <span className="w-2 h-2 rotate-45 bg-black" />
+          <div className="h-[1.5px] bg-black/20 flex-1" />
+        </div>
+
+        {/* Biographical Narrative */}
+        <div className="max-w-3xl mx-auto space-y-4 text-sm sm:text-base text-neutral-700 leading-relaxed font-sans mb-16 text-center">
+          {personalData.bio.map((paragraph, idx) => (
+            <p key={idx}>{paragraph}</p>
           ))}
         </div>
 
-        {/* 4 Fast-Fact Bento Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 text-left">
-          {/* Card 1: Education */}
-          <div className="card-bento p-5 rounded-2xl">
-            <div className="flex items-center gap-2 text-cyan-400 mb-2">
-              <GraduationCap className="w-4 h-4" />
-              <span className="font-mono text-[10px] uppercase tracking-wider font-semibold">
-                ACADEMICS
-              </span>
+        {/* 3 Pillars: Design, Development, Embedded & Hardware */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-16">
+          {/* Pillar 1: Design & Architecture */}
+          <div className="p-7 rounded-sm border border-neutral-300 bg-[#FAFAFA] hover:border-black transition-all">
+            <div className="w-12 h-12 rounded-sm bg-black text-white flex items-center justify-center mb-5">
+              <Layout className="w-6 h-6" />
             </div>
-            <h4 className="font-space text-lg text-white font-bold">MCA Student</h4>
-            <p className="font-sans text-xs text-slate-400 mt-1">
-              St. Joseph's University, Bengaluru (2025–Present)
+            <h3 className="font-montserrat font-extrabold text-base sm:text-lg uppercase tracking-wider text-black mb-2">
+              DESIGN & ARCHITECTURE
+            </h3>
+            <p className="font-sans text-xs sm:text-sm text-neutral-600 leading-relaxed">
+              Architecting modular, maintainable full-stack systems with clean component hierarchies, relational & document database schemas, and intuitive user experiences.
             </p>
           </div>
 
-          {/* Card 2: Location */}
-          <div className="card-bento p-5 rounded-2xl">
-            <div className="flex items-center gap-2 text-cyan-400 mb-2">
-              <MapPin className="w-4 h-4" />
-              <span className="font-mono text-[10px] uppercase tracking-wider font-semibold">
-                BASE
-              </span>
+          {/* Pillar 2: Development & ML */}
+          <div className="p-7 rounded-sm border border-neutral-300 bg-[#FAFAFA] hover:border-black transition-all">
+            <div className="w-12 h-12 rounded-sm bg-black text-white flex items-center justify-center mb-5">
+              <Cpu className="w-6 h-6" />
             </div>
-            <h4 className="font-space text-lg text-white font-bold">Bengaluru, India</h4>
-            <p className="font-sans text-xs text-slate-400 mt-1">
-              Karnataka, India • Open to local & remote
+            <h3 className="font-montserrat font-extrabold text-base sm:text-lg uppercase tracking-wider text-black mb-2">
+              DEVELOPMENT & ML
+            </h3>
+            <p className="font-sans text-xs sm:text-sm text-neutral-600 leading-relaxed">
+              Building intelligent computer vision models (MobileNetV2), machine learning activity classifiers, automated data analytics pipelines, and reactive web applications.
             </p>
           </div>
 
-          {/* Card 3: Primary Language */}
-          <div className="card-bento p-5 rounded-2xl">
-            <div className="flex items-center gap-2 text-cyan-400 mb-2">
-              <Code2 className="w-4 h-4" />
-              <span className="font-mono text-[10px] uppercase tracking-wider font-semibold">
-                PRIMARY LANGUAGE
-              </span>
+          {/* Pillar 3: Embedded & Hardware */}
+          <div className="p-7 rounded-sm border border-neutral-300 bg-[#FAFAFA] hover:border-black transition-all">
+            <div className="w-12 h-12 rounded-sm bg-black text-white flex items-center justify-center mb-5">
+              <Wrench className="w-6 h-6" />
             </div>
-            <h4 className="font-space text-lg text-white font-bold">Python</h4>
-            <p className="font-sans text-xs text-slate-400 mt-1">
-              Also proficient in Java, C++, SQL, React.js
+            <h3 className="font-montserrat font-extrabold text-base sm:text-lg uppercase tracking-wider text-black mb-2">
+              EMBEDDED & HARDWARE
+            </h3>
+            <p className="font-sans text-xs sm:text-sm text-neutral-600 leading-relaxed">
+              Engineering physical computing systems with Arduino, ESP32, and ESP8266 microcontrollers, ultrasonic telemetry, sensor-based obstacle avoidance, and IoT platforms.
             </p>
           </div>
+        </div>
 
-          {/* Card 4: Interests */}
-          <div className="card-bento p-5 rounded-2xl">
-            <div className="flex items-center gap-2 text-cyan-400 mb-2">
-              <Cpu className="w-4 h-4" />
-              <span className="font-mono text-[10px] uppercase tracking-wider font-semibold">
-                SPECIALIZATION
-              </span>
-            </div>
-            <h4 className="font-space text-lg text-white font-bold">AI, IoT & Robotics</h4>
-            <p className="font-sans text-xs text-slate-400 mt-1">
-              Vision Models, Sensor Telemetry & Full-Stack
-            </p>
+        {/* Fast-Facts Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-neutral-200">
+          <div className="p-4 bg-neutral-100 rounded-sm text-center">
+            <GraduationCap className="w-5 h-5 mx-auto text-black mb-1.5" />
+            <span className="font-montserrat text-[10px] uppercase font-bold text-neutral-500 block">
+              EDUCATION
+            </span>
+            <span className="font-montserrat font-bold text-xs sm:text-sm text-black block mt-0.5">
+              MCA Student
+            </span>
+            <span className="text-[11px] text-neutral-600 font-sans">St. Joseph's University</span>
+          </div>
+
+          <div className="p-4 bg-neutral-100 rounded-sm text-center">
+            <MapPin className="w-5 h-5 mx-auto text-black mb-1.5" />
+            <span className="font-montserrat text-[10px] uppercase font-bold text-neutral-500 block">
+              LOCATION
+            </span>
+            <span className="font-montserrat font-bold text-xs sm:text-sm text-black block mt-0.5">
+              Bengaluru, India
+            </span>
+            <span className="text-[11px] text-neutral-600 font-sans">Karnataka</span>
+          </div>
+
+          <div className="p-4 bg-neutral-100 rounded-sm text-center">
+            <Code2 className="w-5 h-5 mx-auto text-black mb-1.5" />
+            <span className="font-montserrat text-[10px] uppercase font-bold text-neutral-500 block">
+              PRIMARY LANGUAGE
+            </span>
+            <span className="font-montserrat font-bold text-xs sm:text-sm text-black block mt-0.5">
+              Python
+            </span>
+            <span className="text-[11px] text-neutral-600 font-sans">Core Programming</span>
+          </div>
+
+          <div className="p-4 bg-neutral-100 rounded-sm text-center">
+            <Sparkles className="w-5 h-5 mx-auto text-black mb-1.5" />
+            <span className="font-montserrat text-[10px] uppercase font-bold text-neutral-500 block">
+              INTERESTS
+            </span>
+            <span className="font-montserrat font-bold text-xs sm:text-sm text-black block mt-0.5">
+              AI, Robotics & IoT
+            </span>
+            <span className="text-[11px] text-neutral-600 font-sans">Software Systems</span>
           </div>
         </div>
       </div>

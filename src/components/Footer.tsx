@@ -1,6 +1,7 @@
 import React from 'react'
 import { ArrowUp, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './SocialIcons'
+import { FRMonogram } from './FRMonogram'
 import { personalData } from '../data/personal'
 
 export const Footer: React.FC = () => {
@@ -11,57 +12,64 @@ export const Footer: React.FC = () => {
   }
 
   return (
-    <footer className="w-full bg-[#08090D] border-t border-white/10 py-12 text-left">
-      <div className="content-container flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-xs font-mono text-slate-400">
-          <span className="font-space text-sm font-bold tracking-tight text-white">
-            FRANKLIN ROHITH F. © {currentYear}
+    <footer className="w-full bg-black text-white py-16 border-t border-neutral-800 text-center">
+      <div className="content-container flex flex-col items-center justify-center space-y-8">
+        {/* Back to top button */}
+        <button
+          onClick={scrollToTop}
+          type="button"
+          className="flex flex-col items-center gap-1.5 text-neutral-400 hover:text-white transition-colors cursor-pointer group"
+        >
+          <div className="w-9 h-9 rounded-full border border-neutral-700 flex items-center justify-center group-hover:border-white transition-colors">
+            <ArrowUp className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-montserrat text-[10px] font-extrabold uppercase tracking-[0.25em]">
+            BACK TO TOP
           </span>
-          <span className="hidden sm:inline text-white/20">|</span>
-          <span>BENGALURU, KARNATAKA, INDIA</span>
-          <span className="hidden sm:inline text-white/20">|</span>
-          <span className="text-cyan-400/90">MCA @ ST. JOSEPH'S UNIVERSITY</span>
+        </button>
+
+        {/* Monogram */}
+        <div className="pt-2">
+          <FRMonogram className="w-8 h-8 text-white mx-auto opacity-90" />
         </div>
 
-        <div className="flex items-center gap-6 text-xs font-sans font-semibold uppercase tracking-wider text-slate-400">
-          <div className="flex items-center gap-4">
-            <a
-              href={personalData.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-cyan-400 transition-colors"
-              aria-label="GitHub"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={personalData.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-cyan-400 transition-colors"
-              aria-label="LinkedIn"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={`mailto:${personalData.email}`}
-              className="text-slate-400 hover:text-cyan-400 transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-          </div>
-
-          <span className="text-white/20">|</span>
-
-          <button
-            onClick={scrollToTop}
-            type="button"
-            className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer font-mono text-xs"
+        {/* Social Links Row */}
+        <div className="flex items-center justify-center gap-6">
+          <a
+            href={`mailto:${personalData.email}`}
+            className="w-10 h-10 rounded-sm bg-neutral-900 border border-neutral-800 hover:border-neutral-500 flex items-center justify-center text-white transition-colors"
+            aria-label="Email"
           >
-            <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-cyan-400" />
-          </button>
+            <Mail className="w-4 h-4" />
+          </a>
+          <a
+            href={personalData.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-sm bg-neutral-900 border border-neutral-800 hover:border-neutral-500 flex items-center justify-center text-white transition-colors"
+            aria-label="GitHub"
+          >
+            <GithubIcon className="w-4 h-4" />
+          </a>
+          <a
+            href={personalData.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-sm bg-neutral-900 border border-neutral-800 hover:border-neutral-500 flex items-center justify-center text-white transition-colors"
+            aria-label="LinkedIn"
+          >
+            <LinkedinIcon className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Copyright notice */}
+        <div className="text-xs font-montserrat text-neutral-500 space-y-1">
+          <p className="font-bold text-neutral-400 uppercase tracking-wider">
+            FRANKLIN ROHITH F. © {currentYear}
+          </p>
+          <p className="text-[11px] font-sans text-neutral-600">
+            Bengaluru, Karnataka, India • Master of Computer Applications
+          </p>
         </div>
       </div>
     </footer>
