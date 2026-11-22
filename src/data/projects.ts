@@ -141,7 +141,6 @@ if anomaly_classifier.predict(features)[0] == TAMPER_SIGNATURE:
 x = GlobalAveragePooling2D()(base_model.output)
 outputs = Dense(6, activation='softmax')(Dropout(0.3)(x))`,
     },
-    githubUrl: 'https://github.com/FRANKLINROHIT',
     hasLiveDemo: false,
     featured: true,
   },
