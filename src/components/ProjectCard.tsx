@@ -26,7 +26,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
       const rect = card.getBoundingClientRect()
       const x = (e.clientX - rect.left) / rect.width - 0.5
       const y = (e.clientY - rect.top) / rect.height - 0.5
-      setRotate({ x: -y * 6, y: x * 6 })
+      setRotate({ x: -y * 5, y: x * 5 })
     }
 
     const handleMouseLeave = () => {
@@ -59,81 +59,81 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
         isTouch
           ? undefined
           : {
-              transform: `perspective(1200px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+              transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
               transition:
                 'transform 0.15s ease-out, border-color 0.2s ease, box-shadow 0.2s ease',
             }
       }
-      className="project-card-item group relative bg-paper border border-[rgba(0,0,0,0.12)] hover:border-[#0B5D3B] p-6 sm:p-7 rounded-2xl transition-all duration-300 cursor-pointer shadow-subtle hover:shadow-card hover:-translate-y-1 preserve-3d flex flex-col justify-between h-full focus:outline-none focus:ring-2 focus:ring-[#0B5D3B] text-left"
+      className="card-bento group p-6 sm:p-7 rounded-2xl cursor-pointer preserve-3d flex flex-col justify-between h-full focus:outline-none focus:ring-1 focus:ring-cyan-400 text-left"
     >
       <div className="flex flex-col h-full">
-        {/* Top Header: Number and Category */}
-        <div className="flex items-baseline gap-4 pb-4 border-b border-[rgba(0,0,0,0.12)]">
-          <span className="font-serif text-3xl sm:text-4xl text-ink font-normal flex-shrink-0 select-none">
+        {/* Top Header: Number and Domain Category */}
+        <div className="flex items-baseline justify-between pb-4 border-b border-white/[0.08]">
+          <span className="font-mono text-2xl sm:text-3xl font-bold text-cyan-400 select-none">
             {project.number}
           </span>
-          <span className="font-sans text-[10.5px] sm:text-xs tracking-[0.16em] uppercase text-[#0B5D3B] font-semibold truncate">
+          <span className="font-mono text-[10.5px] uppercase tracking-wider text-slate-400 px-2.5 py-0.5 rounded bg-[#151924] border border-white/10">
             {project.category}
           </span>
         </div>
 
         {/* Title and Short Description */}
         <div className="mt-5 mb-2">
-          <h3 className="font-serif text-2xl sm:text-3xl text-ink font-normal normal-case group-hover:text-[#0B5D3B] transition-colors leading-tight">
+          <h3 className="font-space text-2xl text-white font-bold group-hover:text-cyan-400 transition-colors leading-tight">
             {project.title}
           </h3>
-          <p className="font-sans text-xs sm:text-sm text-ink-muted mt-2 leading-relaxed line-clamp-3">
+          <p className="font-sans text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>
 
-        {/* Embedded Interactive Mockup / Code Window */}
-        <div className="my-4 border border-[rgba(0,0,0,0.12)] bg-[#EFECE6] rounded-xl overflow-hidden shadow-inner flex flex-col">
-          {/* Mockup Bar */}
-          <div className="px-3 py-2 bg-[#E2DFD8] border-b border-[rgba(0,0,0,0.12)] flex items-center justify-between gap-2">
+        {/* Embedded Terminal / Code Console Window */}
+        <div className="my-4 border border-white/10 bg-[#08090D] rounded-xl overflow-hidden shadow-inner flex flex-col">
+          {/* Terminal Title Bar */}
+          <div className="px-3 py-2 bg-[#151924] border-b border-white/[0.08] flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 flex-shrink-0">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#CBC8C1]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#CBC8C1]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#CBC8C1]" />
+              <span className="w-2 h-2 rounded-full bg-rose-500/80" />
+              <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
             </div>
-            <span className="font-mono text-[10px] text-ink-muted truncate max-w-[170px]">
+            <span className="font-mono text-[10px] text-slate-400 truncate max-w-[170px]">
               {project.mockupData.url}
             </span>
-            <span className="font-mono text-[9.5px] uppercase font-bold text-[#0B5D3B] bg-paper px-2 py-0.5 rounded border border-[rgba(0,0,0,0.08)] flex-shrink-0">
+            <span className="font-mono text-[9px] uppercase font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30 flex-shrink-0">
               {project.mockupData.badge}
             </span>
           </div>
 
-          {/* Mockup Code/Specs Window */}
-          <div className="p-3 bg-[#EFECE6] flex flex-col gap-1.5">
-            <div className="flex items-center justify-between text-[10px] font-mono text-ink-muted border-b border-[rgba(0,0,0,0.08)] pb-1">
+          {/* Terminal Body */}
+          <div className="p-3 bg-[#08090D] flex flex-col gap-1">
+            <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 border-b border-white/[0.05] pb-1">
               <span>{project.mockupData.previewTitle}</span>
-              <span className="text-[#0B5D3B] font-semibold">{project.mockupData.stat}</span>
+              <span className="text-cyan-400 font-semibold">{project.mockupData.stat}</span>
             </div>
-            <pre className="font-mono text-[11px] text-ink leading-relaxed whitespace-pre font-medium overflow-x-hidden pt-1">
+            <pre className="font-mono text-[11px] text-slate-200 leading-relaxed whitespace-pre font-medium overflow-x-hidden pt-1">
               <code>{project.mockupData.previewCode}</code>
             </pre>
           </div>
         </div>
 
-        {/* Verified Outcome Summary */}
-        <p className="font-sans text-xs text-ink/85 leading-relaxed mt-auto pt-2 border-t border-[rgba(0,0,0,0.08)]">
-          <strong className="text-ink font-semibold">Engineered: </strong>
+        {/* Verified Outcome */}
+        <p className="font-sans text-xs text-slate-300 leading-relaxed mt-auto pt-2 border-t border-white/[0.06]">
+          <strong className="text-cyan-400 font-semibold font-mono">&gt; Verified: </strong>
           {project.outcome}
         </p>
 
-        {/* Tech Stack Monospace Pills */}
+        {/* Tech Stack Tags */}
         <div className="flex flex-wrap gap-1.5 pt-4">
           {project.technologies.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-0.5 rounded bg-[#E2DFD8]/60 font-mono text-[10.5px] text-ink-muted"
+              className="px-2 py-0.5 rounded bg-[#151924] font-mono text-[10px] text-slate-300 border border-white/5"
             >
               {tech}
             </span>
           ))}
           {project.technologies.length > 5 && (
-            <span className="px-1.5 py-0.5 font-mono text-[10px] text-ink-muted">
+            <span className="px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
               +{project.technologies.length - 5}
             </span>
           )}
@@ -141,9 +141,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
       </div>
 
       {/* Action Footer */}
-      <div className="mt-5 pt-4 border-t border-[rgba(0,0,0,0.12)] flex items-center justify-between">
-        <span className="font-sans text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1.5">
-          <span>Inspect Specifications</span>
+      <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center justify-between">
+        <span className="font-space text-xs font-bold uppercase tracking-wider text-cyan-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1.5">
+          <span>Inspect Architecture</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </span>
 
@@ -153,7 +153,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="p-1.5 rounded-lg text-ink-muted hover:text-[#0B5D3B] hover:bg-[#E2DFD8] transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
             title="View on GitHub"
             aria-label="GitHub Repository"
           >
@@ -166,7 +166,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="p-1.5 rounded-lg text-ink-muted hover:text-[#0B5D3B] hover:bg-[#E2DFD8] transition-colors"
+              className="p-1.5 rounded-lg text-cyan-400 hover:text-white hover:bg-white/10 transition-colors"
               title="View Live Demo"
               aria-label="Live Demo"
             >

@@ -13,14 +13,14 @@ import { BackToTop } from './components/BackToTop'
 
 export function App() {
   return (
-    <div className="relative min-h-screen bg-[#F7F7F5] text-[#111111] antialiased selection:bg-[#0B5D3B] selection:text-white">
+    <div className="relative min-h-screen bg-[#08090D] text-[#F1F5F9] antialiased selection:bg-[#38BDF8] selection:text-black">
       {/* Top Hairline Scroll Progress Bar */}
       <ScrollProgress />
 
-      {/* Sticky Minimal Navbar */}
+      {/* Sticky Obsidian Navbar */}
       <Navbar />
 
-      {/* Editorial Page Flow */}
+      {/* Engineering Bento Page Flow */}
       <main className="relative z-10 flex flex-col">
         <Hero />
         <About />
@@ -32,7 +32,7 @@ export function App() {
         <Contact />
       </main>
 
-      {/* Minimal Footer */}
+      {/* Obsidian Footer */}
       <Footer />
 
       {/* Floating Back to Top */}

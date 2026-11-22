@@ -3,8 +3,10 @@ import {
   ArrowRight,
   FileDown,
   Mail,
-  GraduationCap,
-  MapPin,
+  Cpu,
+  Layers,
+  Sparkles,
+  Terminal,
 } from 'lucide-react'
 import { personalData } from '../data/personal'
 
@@ -23,7 +25,7 @@ export const Hero: React.FC = () => {
       const { innerWidth, innerHeight } = window
       const x = (e.clientX / innerWidth - 0.5) * 2
       const y = (e.clientY / innerHeight - 0.5) * 2
-      setRotate({ x: -y * 4, y: x * 4 })
+      setRotate({ x: -y * 3.5, y: x * 3.5 })
     }
 
     window.addEventListener('mousemove', handleMouseMove)
@@ -33,45 +35,60 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative w-full bg-paper pt-10 sm:pt-14 pb-12 sm:pb-16 border-b border-[rgba(0,0,0,0.12)] overflow-hidden"
+      className="relative w-full bg-[#08090D] bg-blueprint-grid pt-12 sm:pt-16 pb-14 sm:pb-20 border-b border-white/[0.08] overflow-hidden"
     >
+      {/* Subtle radial ambient glow in the background */}
+      <div
+        className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none opacity-20"
+        style={{
+          background: 'radial-gradient(circle, #38BDF8 0%, rgba(99, 102, 241, 0) 70%)',
+        }}
+      />
+
       <div className="content-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column (lg:col-span-7) */}
-          <div className="lg:col-span-7 flex flex-col items-start z-10 pb-4 sm:pb-6 text-left">
-            {/* Eyebrow */}
-            <div className="hero-eyebrow flex items-center gap-2 mb-4">
-              <span className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#0B5D3B]">
-                PORTFOLIO // BENGALURU, INDIA
+          <div className="lg:col-span-7 flex flex-col items-start z-10 text-left">
+            {/* System Status Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-[#151924] border border-white/10 text-xs font-mono mb-5 shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span className="w-8 h-[1.5px] bg-[#0B5D3B]" />
+              <span className="text-slate-300 font-medium">BENGALURU, INDIA</span>
+              <span className="text-slate-600">//</span>
+              <span className="text-cyan-400 font-semibold">MCA @ ST. JOSEPH'S UNIV</span>
             </div>
 
-            {/* Giant Monumental Name */}
-            <h1 className="font-anton text-[clamp(2.5rem,7.6vw,6.4rem)] leading-[0.88] tracking-[-0.02em] uppercase text-ink select-none whitespace-normal sm:whitespace-nowrap overflow-visible">
-              FRANKLIN ROHITH F.
+            {/* Monumental Headline */}
+            <h1 className="font-space text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05]">
+              FRANKLIN <br className="hidden sm:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
+                ROHITH F.
+              </span>
             </h1>
 
-            {/* Role Subtitle */}
-            <div className="hero-role mt-4 font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.14em] sm:tracking-[0.2em] uppercase text-[#0B5D3B] font-semibold leading-relaxed">
-              {personalData.role}
+            {/* Technical Sub-Role */}
+            <div className="mt-4 font-mono text-xs sm:text-sm text-cyan-400 font-semibold tracking-wide flex items-center gap-2">
+              <span className="text-slate-500">&gt;</span>
+              <span>Software Developer • AI/ML Enthusiast • Robotics & IoT</span>
             </div>
 
             {/* Tagline */}
-            <p className="hero-text mt-5 font-sans text-sm sm:text-base lg:text-lg text-ink/85 max-w-xl leading-relaxed">
+            <p className="mt-5 font-sans text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl leading-relaxed">
               {personalData.tagline}
             </p>
 
             {/* Intro */}
-            <p className="hero-text mt-2.5 font-sans text-xs sm:text-sm text-ink-muted max-w-xl leading-relaxed">
+            <p className="mt-2.5 font-sans text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
               {personalData.intro}
             </p>
 
-            {/* CTA Buttons */}
-            <div className="hero-cta mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto relative z-20">
+            {/* Action Buttons */}
+            <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto relative z-20">
               <a
                 href="#projects"
-                className="hero-cta-btn inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full bg-[#0B5D3B] text-white font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase hover:bg-[#08492E] transition-all shadow-sm hover:shadow active:scale-95 text-center"
+                className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-space text-xs sm:text-sm font-bold tracking-wider uppercase hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition-all active:scale-95 text-center"
               >
                 <span>View Projects</span>
                 <ArrowRight className="w-4 h-4" />
@@ -80,129 +97,121 @@ export const Hero: React.FC = () => {
               <a
                 href={personalData.resumeUrl}
                 download="Franklin_Rohith_Resume.pdf"
-                className="inline-flex items-center justify-center gap-2.5 h-12 px-6 rounded-full bg-transparent border border-[#0B5D3B] text-[#0B5D3B] font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase hover:bg-[#0B5D3B] hover:text-white transition-all text-center active:scale-95"
+                className="inline-flex items-center justify-center gap-2.5 h-12 px-6 rounded-xl bg-[#10131B] border border-white/15 text-slate-200 font-mono text-xs sm:text-sm font-semibold tracking-wider uppercase hover:border-cyan-400/50 hover:text-white transition-all text-center active:scale-95"
               >
-                <FileDown className="w-4 h-4" />
-                <span>Download Resume</span>
+                <FileDown className="w-4 h-4 text-cyan-400" />
+                <span>Resume PDF</span>
               </a>
 
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2.5 h-12 px-6 rounded-full bg-transparent border border-[rgba(0,0,0,0.18)] text-ink font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase hover:border-[#0B5D3B] hover:text-[#0B5D3B] transition-all text-center active:scale-95"
+                className="inline-flex items-center justify-center gap-2.5 h-12 px-6 rounded-xl bg-transparent border border-white/10 text-slate-300 font-space text-xs sm:text-sm font-semibold tracking-wider uppercase hover:border-white/30 hover:text-white transition-all text-center active:scale-95"
               >
                 <Mail className="w-4 h-4" />
-                <span>Contact Me</span>
+                <span>Contact</span>
               </a>
             </div>
 
             {/* Channels Row */}
-            <div className="mt-8 pt-6 border-t border-[rgba(0,0,0,0.12)] flex flex-wrap items-center gap-4 text-xs font-mono text-ink-muted">
-              <span className="font-bold text-ink uppercase tracking-wider">CHANNELS:</span>
+            <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
+              <span className="font-bold text-slate-200 uppercase tracking-wider">CHANNELS:</span>
               <a
                 href={personalData.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#0B5D3B] underline underline-offset-4"
+                className="hover:text-cyan-400 underline underline-offset-4"
               >
                 github.com/FRANKLINROHIT
               </a>
-              <span>/</span>
+              <span className="text-slate-600">/</span>
               <a
                 href={personalData.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#0B5D3B] underline underline-offset-4"
+                className="hover:text-cyan-400 underline underline-offset-4"
               >
                 linkedin/in/franklin-rohit
               </a>
-              <span>/</span>
+              <span className="text-slate-600">/</span>
               <a
                 href={`mailto:${personalData.email}`}
-                className="hover:text-[#0B5D3B] underline underline-offset-4"
+                className="hover:text-cyan-400 underline underline-offset-4"
               >
                 {personalData.email}
               </a>
             </div>
           </div>
 
-          {/* Right Column (lg:col-span-5) - Portrait with Architectural Glass Card Frame */}
-          <div className="lg:col-span-5 relative flex items-end justify-center lg:justify-end">
+          {/* Right Column (lg:col-span-5) - Portrait with Cyber-Bezel Studio Bento Frame */}
+          <div className="lg:col-span-5 relative flex items-center justify-center lg:justify-end">
             <div
               ref={cardRef}
-              className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[410px] aspect-[4/5] flex items-end justify-center"
+              className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[4/5] flex items-center justify-center"
               style={
                 isTouch
                   ? undefined
                   : {
                       transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-                      transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                      transition: 'transform 0.15s ease-out',
                     }
               }
             >
-              {/* Outer Depth Shadow */}
+              {/* Outer Cyber Accent Glow */}
               <div
-                className="absolute inset-x-3 sm:inset-x-5 bottom-0 top-8 sm:top-10 rounded-[2.2rem] pointer-events-none -z-20"
-                style={{
-                  boxShadow:
-                    '0 30px 60px -15px rgba(20, 26, 22, 0.12), 0 12px 28px -6px rgba(0, 0, 0, 0.06)',
-                }}
-                aria-hidden="true"
-              />
-
-              {/* Ambient Highlight */}
-              <div
-                className="absolute inset-x-2 sm:inset-x-3 bottom-0 top-6 sm:top-8 rounded-[2.2rem] pointer-events-none -z-10"
-                style={{
-                  boxShadow:
-                    '0 0 40px 10px rgba(255, 255, 255, 0.95), 0 0 80px 20px rgba(255, 255, 255, 0.6)',
-                }}
-                aria-hidden="true"
-              />
-
-              {/* Architectural Glass Container */}
-              <div
-                className="absolute inset-x-2 sm:inset-x-3 bottom-0 top-6 sm:top-8 rounded-[2.2rem] z-0 pointer-events-none"
+                className="absolute -inset-1 rounded-[2.2rem] opacity-30 blur-xl pointer-events-none"
                 style={{
                   background:
-                    'linear-gradient(140deg, rgba(255, 255, 255, 0.72) 0%, rgba(247, 247, 245, 0.45) 50%, rgba(255, 255, 255, 0.6) 100%)',
-                  backdropFilter: 'blur(12px)',
-                  WebkitBackdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(255, 255, 255, 0.85)',
-                  boxShadow: `
-                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
-                    inset 0 0 30px 0 rgba(255, 255, 255, 0.35),
-                    0 0 35px 4px rgba(255, 255, 255, 0.75),
-                    0 25px 45px -12px rgba(18, 25, 20, 0.08)
-                  `,
+                    'linear-gradient(135deg, rgba(56, 189, 248, 0.4) 0%, rgba(99, 102, 241, 0.2) 100%)',
                 }}
-                aria-hidden="true"
               />
 
-              {/* Portrait Image Container */}
-              <div className="w-full h-full relative z-10 rounded-[2.2rem] overflow-hidden flex items-end justify-center shadow-subtle border border-[rgba(0,0,0,0.08)]">
-                <img
-                  src="/portrait.jpg"
-                  alt="Franklin Rohith F. - Software Developer & MCA Student"
-                  className="w-full h-full object-cover object-top select-none pointer-events-none relative z-10 drop-shadow-[0_14px_28px_rgba(0,0,0,0.08)]"
-                  loading="eager"
-                />
-
-                {/* Glass Status Overlay Pill */}
-                <div className="absolute bottom-4 inset-x-4 z-20 px-4 py-2.5 rounded-2xl bg-[#F6F4EF]/92 backdrop-blur-md border border-[rgba(0,0,0,0.12)] flex items-center justify-between text-xs shadow-md">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#0B5D3B] animate-pulse" />
-                    <div>
-                      <span className="font-sans font-bold text-ink text-xs block leading-tight">
-                        Franklin Rohith F.
-                      </span>
-                      <span className="font-sans text-[10.5px] text-ink-muted">
-                        St. Joseph's University, Bengaluru
-                      </span>
-                    </div>
+              {/* Main Bezel Container */}
+              <div className="w-full h-full relative z-10 rounded-[2.2rem] bg-[#10131B] border border-white/15 p-2.5 shadow-2xl overflow-hidden flex flex-col">
+                {/* Top Terminal Strip */}
+                <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/[0.08] mb-2 font-mono text-[10px] text-slate-400">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-rose-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="font-mono text-[10px] uppercase font-bold text-[#0B5D3B] px-2 py-0.5 rounded bg-paper border border-[rgba(0,0,0,0.08)]">
-                    MCA // READY
-                  </span>
+                  <span className="uppercase text-cyan-400 font-semibold">PORTRAIT // ARCHIVE</span>
+                  <span>ID: FRF-2026</span>
+                </div>
+
+                {/* Portrait Image Container */}
+                <div className="w-full flex-1 relative rounded-[1.6rem] overflow-hidden">
+                  <img
+                    src="/portrait.jpg"
+                    alt="Franklin Rohith F. - Software Developer"
+                    className="w-full h-full object-cover object-top select-none pointer-events-none"
+                    loading="eager"
+                  />
+
+                  {/* Corner Engineering Crosshairs */}
+                  <div className="absolute top-3 left-3 font-mono text-cyan-400/80 text-xs select-none pointer-events-none">
+                    +
+                  </div>
+                  <div className="absolute top-3 right-3 font-mono text-cyan-400/80 text-xs select-none pointer-events-none">
+                    +
+                  </div>
+
+                  {/* Floating Glass Telemetry Pill at Bottom */}
+                  <div className="absolute bottom-3 inset-x-3 z-20 px-3.5 py-2.5 rounded-xl bg-[#08090D]/85 backdrop-blur-md border border-white/15 flex items-center justify-between text-xs shadow-lg">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <div className="text-left">
+                        <span className="font-space font-bold text-white text-xs block leading-tight">
+                          Franklin Rohith F.
+                        </span>
+                        <span className="font-mono text-[10px] text-slate-400">
+                          MCA @ St. Joseph's University
+                        </span>
+                      </div>
+                    </div>
+                    <span className="font-mono text-[9.5px] uppercase font-bold text-cyan-400 px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30">
+                      ACTIVE // OPEN
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
