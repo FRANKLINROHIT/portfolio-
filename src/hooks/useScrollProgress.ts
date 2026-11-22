@@ -1,0 +1,26 @@
+import { useEffect, useState } from 'react'
+
+export const useScrollProgress = () => {
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop
+      const windowHeight =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight
+      if (windowHeight === 0) {
+        setProgress(0)
+        return
+      }
+      const scrollPercent = (totalScroll / windowHeight) * 100
+      setProgress(scrollPercent)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return progress
+}

@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-paper: #F7F7F5;
+    --bg-paper-card: #EFECE6;
+    --bg-paper-bar: #E2DFD8;
+    --color-ink: #111111;
+    --color-ink-muted: #555555;
+    --color-accent: #0B5D3B;
+    --color-accent-hover: #08492E;
+    --border-subtle: rgba(0, 0, 0, 0.12);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-paper);
+    color: var(--color-ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-paper);
+    color: var(--color-ink);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Custom Clean Minimal Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F7F7F5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D8D4CC;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #BEB9AF;
+  }
+}
+
+/* Custom Font Utilities */
+.font-anton {
+  font-family: 'Anton', sans-serif;
+}
+
+.font-serif {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Semantic theme helpers */
+.bg-paper {
+  background-color: #F7F7F5;
+}
+
+.bg-paper-card {
+  background-color: #EFECE6;
+}
+
+.bg-paper-bar {
+  background-color: #E2DFD8;
+}
+
+.text-ink {
+  color: #111111;
+}
+
+.text-ink-muted {
+  color: #555555;
+}
+
+.text-accent {
+  color: #0B5D3B;
+}
+
+.bg-accent {
+  background-color: #0B5D3B;
+}
+
+.border-subtle {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.shadow-subtle {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.shadow-card {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+}
+
+.content-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .content-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* 3D Perspective for Cards */
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Reduced motion consideration */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
