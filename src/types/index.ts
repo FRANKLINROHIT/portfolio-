@@ -72,7 +72,7 @@ export interface Project {
   resultsVerified: string
   mockupType: 'browser' | 'terminal' | 'dashboard'
   mockupData: ProjectMockupData
-  githubUrl: string
+  githubUrl?: string
   liveDemoUrl?: string
   hasLiveDemo: boolean
   featured: boolean
