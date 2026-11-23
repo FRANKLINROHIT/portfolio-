@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowUpRight, Github } from 'lucide-react'
+import { ArrowUpRight, Github, Maximize2 } from 'lucide-react'
 import type { Project } from '../types'
 
 interface ProjectCardProps {
@@ -9,9 +9,21 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) => {
   return (
-    <div className="bg-white border border-neutral-300 rounded-sm overflow-hidden hover:border-black transition-all flex flex-col justify-between group shadow-sm hover:shadow-md">
+    <div
+      onClick={() => onSelect(project)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onSelect(project)
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      className="bg-white border border-neutral-300 rounded-sm overflow-hidden hover:border-black transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-xl hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-black"
+      aria-label={`View details for ${project.title}`}
+    >
       {/* Top Header Mockup Area */}
-      <div className="p-4 bg-neutral-900 border-b border-neutral-800 text-neutral-300 font-mono text-xs">
+      <div className="p-4 bg-neutral-900 border-b border-neutral-800 text-neutral-300 font-mono text-xs relative">
         <div className="flex items-center justify-between mb-2.5">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-neutral-700" />
@@ -26,7 +38,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
         {/* Code Snippet / Terminal Line */}
         <div className="bg-neutral-950 p-2.5 rounded font-mono text-[11px] text-neutral-300 overflow-x-auto whitespace-pre">
           <div className="text-neutral-500">// {project.category.toUpperCase()}</div>
-          <div className="text-neutral-300">$ status: verified</div>
+          <div className="text-neutral-300 flex items-center justify-between">
+            <span>$ status: verified</span>
+            <span className="text-[10px] text-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 font-sans font-bold uppercase">
+              <Maximize2 className="w-3 h-3" />
+              <span>Expand</span>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -66,20 +84,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
 
           {/* Action Buttons */}
           <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
-            <button
-              onClick={() => onSelect(project)}
-              type="button"
-              className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold text-black uppercase tracking-wider hover:opacity-75 transition-opacity cursor-pointer"
-            >
-              <span>MORE DETAILS</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            <span className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold text-black uppercase tracking-wider group-hover:underline">
+              <span>VIEW POPUP DETAILS</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </span>
 
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="p-1.5 text-neutral-500 hover:text-black transition-colors"
                 title="View GitHub Repository"
                 aria-label="View GitHub Repository"

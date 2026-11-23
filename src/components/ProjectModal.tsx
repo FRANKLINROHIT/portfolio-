@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import {
   X,
   Target,
   AlertCircle,
   CheckCircle2,
   Cpu,
+  Layers,
+  Terminal,
 } from 'lucide-react'
 import { GithubIcon } from './SocialIcons'
 import type { Project } from '../types'
@@ -34,20 +37,34 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   if (!project) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-md"
       onClick={onClose}
     >
-      <div
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-sm bg-white p-6 sm:p-9 border-2 border-black shadow-2xl space-y-6 text-left"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.88, y: 25 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.92, y: 20 }}
+        transition={{ type: 'spring', damping: 28, stiffness: 340 }}
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-sm bg-white p-6 sm:p-9 border-2 border-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] space-y-6 text-left"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
         <div className="flex items-start justify-between gap-4 border-b border-neutral-200 pb-4">
           <div className="space-y-1">
-            <span className="font-montserrat text-xs font-extrabold uppercase tracking-widest text-neutral-500 block">
-              {project.category}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-montserrat text-xs font-extrabold uppercase tracking-widest text-neutral-500">
+                {project.category}
+              </span>
+              <span className="text-neutral-300">•</span>
+              <span className="font-mono text-xs font-bold text-neutral-400">
+                ID: {project.number}
+              </span>
+            </div>
             <h3 className="font-montserrat text-2xl sm:text-3xl text-black font-extrabold leading-tight">
               {project.title}
             </h3>
@@ -57,7 +74,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             onClick={onClose}
             type="button"
             className="p-2 rounded-sm text-neutral-500 hover:text-black hover:bg-neutral-100 transition-colors cursor-pointer"
-            aria-label="Close project modal"
+            aria-label="Close project popup"
           >
             <X className="w-6 h-6" />
           </button>
@@ -91,7 +108,25 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
         </div>
 
-        {/* Implementation Details */}
+        {/* Simulated Code / Terminal Preview if available */}
+        {project.mockupData && project.mockupData.previewCode && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs font-montserrat font-bold text-neutral-700">
+              <span className="flex items-center gap-1.5 uppercase tracking-wider">
+                <Terminal className="w-3.5 h-3.5" />
+                <span>{project.mockupData.previewTitle || 'Core Implementation Snippet'}</span>
+              </span>
+              <span className="font-mono text-[10px] text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-sm">
+                {project.mockupData.badge || 'VERIFIED CODE'}
+              </span>
+            </div>
+            <div className="bg-neutral-950 p-4 rounded-sm border border-neutral-800 text-neutral-200 font-mono text-xs overflow-x-auto whitespace-pre">
+              {project.mockupData.previewCode}
+            </div>
+          </div>
+        )}
+
+        {/* Implementation Highlights */}
         <div className="space-y-3">
           <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-black flex items-center gap-2">
             <Cpu className="w-4 h-4" />
@@ -106,6 +141,24 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             ))}
           </ul>
         </div>
+
+        {/* Key Features */}
+        {project.keyFeatures && project.keyFeatures.length > 0 && (
+          <div className="space-y-2">
+            <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-neutral-600 flex items-center gap-2">
+              <Layers className="w-4 h-4" />
+              <span>Key Capabilities</span>
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {project.keyFeatures.map((feat: string, idx: number) => (
+                <div key={idx} className="flex items-center gap-2 text-xs font-sans text-neutral-700">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                  <span>{feat}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Verified Results */}
         {project.resultsVerified && (
@@ -151,7 +204,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </a>
           ) : (
             <span className="text-xs font-mono text-neutral-500">
-              Repository: Academic Internal Archive
+              Hardware & Academic System
             </span>
           )}
 
@@ -160,10 +213,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             type="button"
             className="text-xs font-montserrat font-bold text-neutral-500 hover:text-black uppercase tracking-wider transition-colors cursor-pointer"
           >
-            Close Modal
+            Close Pop-up
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }

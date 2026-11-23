@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { ProjectCard } from './ProjectCard'
 import { ProjectModal } from './ProjectModal'
 import { projectsData } from '../data/projects'
@@ -71,13 +72,15 @@ export const Projects: React.FC = () => {
           ))}
         </div>
 
-        {/* Project Detail Modal */}
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
+        {/* Project Detail Pop-up Modal with Spring & Backdrop Animation */}
+        <AnimatePresence>
+          {selectedProject && (
+            <ProjectModal
+              project={selectedProject}
+              onClose={() => setSelectedProject(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )
